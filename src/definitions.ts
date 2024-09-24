@@ -1,3 +1,3 @@
 export interface PrintPdfPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  printPdf(options: {filepath: string}): Promise<void>;
 }
