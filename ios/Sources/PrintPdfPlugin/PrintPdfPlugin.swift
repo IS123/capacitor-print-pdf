@@ -9,15 +9,32 @@ import Capacitor
 public class PrintPdfPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "PrintPdfPlugin"
     public let jsName = "PrintPdf"
+    
     public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "echo", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "printPdf", returnType: CAPPluginReturnPromise)
     ]
+    
     private let implementation = PrintPdf()
-
-    @objc func echo(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
-        call.resolve([
-            "value": implementation.echo(value)
-        ])
+    
+    @objc func printPdf(_ call: CAPPluginCall) {
+        guard let filePath = call.getString("filepath") else {
+            call.reject("File path is required")
+            return
+        }
+        
+        
+        implementation.printPdf(filePath: filePath) { success, error in
+            if success {
+                call.resolve([
+                    "status": "success"
+                ])
+            } else if let errorMessage = error {
+                call.reject(errorMessage)
+            } else {
+                call.resolve([
+                    "status": "cancelled"
+                ])
+            }
+        }
     }
 }
