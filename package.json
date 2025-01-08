@@ -1,6 +1,6 @@
 {
   "name": "capacitor-print-pdf",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Print PDF`s using native methods",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
