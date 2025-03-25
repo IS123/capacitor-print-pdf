@@ -1,6 +1,6 @@
 # node files
-dist
 node_modules
+# dist # dist is included since the repo is not distributed via npm
 
 # iOS files
 Pods
